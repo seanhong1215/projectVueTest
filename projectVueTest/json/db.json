@@ -1,0 +1,76 @@
+{
+  "users": [
+    {
+      "email": "demo123@gmail.com",
+      "password": "$2a$10$8cEgqKDc1iNVD4S1usJyzOPz3qr3qRzKPv9NNg8pqfoOKpnJqjWPu",
+      "id": 1,
+      "role": "admin",
+      "nickname": "demo123"
+    },
+    {
+      "email": "user123@gmail.com",
+      "password": "$2a$10$CIPrvoGTzlilIWqB0DOb1u19tdx65qoL99k.EiuidKqk/0FgCTDRi",
+      "id": 2
+    },
+    {
+      "email": "user000@gmail.com",
+      "password": "$2a$10$YusYjEm.MIBTCtefkxkOc.wPzIXqaWINBkVeezKu6m5aLNGvqz6nS",
+      "id": 3
+    },
+    {
+      "email": "user111@gmail.com",
+      "password": "$2a$10$7hVbzdAoZEuX6vlEfGoUMOgcgGlgMwvE1IvrCJBPl7bhobtcMzDqu",
+      "nickname": "user",
+      "id": 4
+    }
+  ],
+  "views": [
+    {
+      "name": "潭子落羽松祕境",
+      "content": "時至深秋，潭子落羽松祕境已然成為行旅中臺灣必訪地點。過了新田登山步道口後，沿著龍興巷繼續向一旁的產業道路走上山坡，便可遠眺這片美麗的大片落羽松林。",
+      "images": "https://travel.taichung.gov.tw/content/images/attractions/32610/1024x768_image637123580787414748.jpg",
+      "id": 1
+    },
+    {
+      "name": "大雅麥田",
+      "content": "每年三月小麥成熟時，臺中大雅麥田就閃耀著大片金黃。微風吹過，麥穗低下了頭又挺直了身，麥浪搖曳如波，蔚為臺中市迷人的知名景觀。大雅擁全臺九成小麥產量，每年舉行的文化節也以小麥為行銷主題。現場除了風吹麥浪以外，也設計了大小不一的藝術裝置。由於文化節期間正值西洋情人節，藝術展品也多和戀愛相關，所以大雅麥田也意外成為一處情侶約會的熱門場地。如果幸運的話，還能拍到小麥成熟三階段的照片，這頭還是綠油油的一片，相距數百公尺則已經出現銘黃、金黃的麥田，在大雅體驗大自然的神奇。",
+      "id": 2,
+      "images": "https://travel.taichung.gov.tw/image/32452?r=637837893166787281"
+    },
+    {
+      "name": "公老坪",
+      "content": "豐原人以擁有遼闊景觀視野的公老坪為傲，公老坪也是小情侶們登山賞景的絕佳約會地點。 依山而建的景觀餐廳、景觀咖啡廳，乃至丘逢甲紀念公園，都能欣賞臺中絕美夜景。海拔不及五百公尺的公老坪，傳說是一位名為許公老的先賢，帶領鄉親共同開拓而得名。傍晚時分登山，可以親眼見證藍天逐漸轉往魚肚白，夕陽映照出大片橙黃橘綠的漸層色彩，最後轉為深藍色，萬千燈火在夜空中一一點亮。",
+      "id": 3,
+      "images": "https://travel.taichung.gov.tw/content/images/attractions/32444/1024x768_image637115239943367404.jpg"
+    },
+    {
+      "name": "MITSUI OUTLET PARK 台中港",
+      "content": "MITSUI OUTLET PARK 台中港又稱台中港三井Outlet，是MITSUI OUTLET PARK位於台灣台中市梧棲區的大型暢貨購物中心。",
+      "id": 4,
+      "images": "https://travel.taichung.gov.tw/content/images/attractions/51528/1024x768_image637771628544801165.jpg"
+    },
+    {
+      "name": "外埔忘憂谷",
+      "content": "站在河堤，居高臨下，觸目所及是由一塊塊錯落有致的田地，拼貼成夏綠秋黃的大地，真如孟浩然詩句「綠樹村邊合，青山郭外斜」的悠然意境。",
+      "id": 5,
+      "images": "https://travel.taichung.gov.tw/content/images/attractions/32465/1024x768_image637115888599679081.jpg"
+    }
+  ],
+  "bookmarks": [
+    {
+      "userId": "1",
+      "viewId": "5",
+      "id": 6
+    },
+    {
+      "userId": "1",
+      "viewId": "4",
+      "id": 7
+    },
+    {
+      "userId": "4",
+      "viewId": "3",
+      "id": 9
+    }
+  ]
+}
