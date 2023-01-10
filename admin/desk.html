@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW" class="h-100">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <title>Desk</title>
+    <link
+      rel="canonical"
+      href="https://bootstrap5.hexschool.com/docs/5.1/examples/sticky-footer-navbar/"
+    />
+    <style>
+      figure img {
+        display: none;
+      }
+    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <style>
+      figure img {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <header>
+      <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+        <section class="container-fluid">
+          <a href="#" class="navbar-brand">這裡是主控台</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/"
+                  >前往前台</a
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+      </nav>
+    </header>
+    <main class="flex-shrink-0 js-main">
+      <div class="container py-5">
+        <h2 class="py-5">
+          <a href="./views/create.html" class="block">新增景點-GO!</a>
+        </h2>
+        <section class="js-view-list">
+          <pre>LOADING...</pre>
+        </section>
+      </div>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <!-- <script src="../helpers/renderUserMenu.js"></script> -->
+
+    <script>
+      const BASE_URL = 'https://vercel-vue-test-mu.vercel.app'
+      const BASE_VIEW_URL = `${BASE_URL}/664/views`;
+      const USERS_URL = `${BASE_URL}/600/users`;
+      const domPostList = document.querySelector('.js-view-list');
+
+      function goToEditPost(id) {
+        const edit = document.querySelector('.js-edit');
+        edit.addEventListener('click', function(){
+          axios.get(BASE_VIEW_URL)
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        })
+        const page = `./views/editor.html?id=${id}`;
+        window.location.replace(page);
+      }
+      function deletePost(id) {
+        axios
+          .delete(`${BASE_VIEW_URL}/${id}`)
+            .then(function (response) {
+              getPosts();
+            })
+          .catch(function (error) {
+            console.log('error:::', JSON.stringify(error, null, 2));
+          });
+      }
+
+      function modifyPost(event) {
+        const target = event.target;
+        const targetType = event.target.dataset.type;
+        // const targetTag = event.target.closest('tr');
+        const targetId = event.target.dataset.id;
+        if (!targetType) {
+          return null;
+        }
+
+        if (targetType === 'DELETE') {
+          // console.log(targetType, targetId);
+          return deletePost(targetId);
+        }
+
+        if (targetType === 'EDIT') {
+          // console.log(targetType, targetId);
+          return goToEditPost(targetId);
+        }
+      }
+
+      function postsTemplate(
+        views,
+        template = `
+      <div class="table-responsive">
+        <table class="js-view-list  table align-middle table-sm table-hover">
+          <thead class="table-light text-center">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">標題</th>
+              <th scope="col">內文</th>
+              <th scope="col"></th> 
+            </tr>
+          </thead>
+          <tbody class="">
+      `
+      ) {
+        views.forEach((view) => {
+          const article = view.content ? view.content : '';
+
+          template += `
+            <tr  data-id="${view.id}">
+              <th scope="row">
+                <code>${view.id}</code>
+              </th>
+              <td>
+                ${view.name}
+              </td>
+              <td>
+                <article>${article}</article>
+              </td>
+
+              <td>
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                  
+                  <input data-type="DELETE" data-id="${view.id}"
+                  class="js-delete  btn btn-sm btn-outline-danger" type="button" value="刪除">
+
+                  <input data-type="EDIT" data-id="${view.id}"
+                  class="js-edit  btn btn-sm btn-warning" type="button" value="編輯">                  
+                </div>
+              </td>              
+            </tr>        
+        `;
+        });
+
+        template += `
+          </tbody>
+        </table>
+      </div>
+      `;
+        return template;
+      }
+
+      function getPosts() {
+        const url = `${BASE_VIEW_URL}`;
+        axios
+          .get(url)
+          .then(function (response) {
+            const htmlContent = postsTemplate(response.data);
+            domPostList.innerHTML = htmlContent;
+          })
+          .catch(function (error) {
+            console.log(error);
+            // domMsg.innerHTML = error.response.status;
+          });
+      }
+      function getLoggedID() {
+        return localStorage.getItem('userId') || 0;
+      }
+
+      function init() {
+        if (!getLoggedID()) {
+          window.location.replace('/');
+        }
+        const AUTH = `Bearer ${localStorage.getItem('token')}`;
+        axios.defaults.headers.common.Authorization = AUTH;
+        const userId = getLoggedID();
+        const url = `${USERS_URL}/${userId}`;
+
+        axios
+          .get(url)
+          .then(function (response) {
+            if (response.status === 200) {
+              const isAdmin = response.data?.role === 'admin';
+              if (!isAdmin) {
+                console.log('401!');
+                document.querySelector('.js-main').innerHTML = '';
+
+                window.location.replace('/');
+              }
+              if (isAdmin) {
+                getPosts();
+              }
+            }
+          })
+          .catch(function (error) {
+            if (error?.response?.status === 401) {
+              console.log('401');
+              localStorage.clear();
+              window.location.replace('/login.html');
+            }
+            domMsg.innerHTML = error?.response?.status || error;
+          });
+      }
+      init();
+
+      document
+        .querySelector('.js-view-list')
+        .addEventListener('click', (event) => modifyPost(event));
+    </script>
+  </body>
+</html>
